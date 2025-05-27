@@ -1,5 +1,5 @@
 'use client';
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './styles/nibbly.scss';
 import { Space_Mono } from "next/font/google";
 import shuffle from '@/utils/shuffle';
@@ -50,34 +50,34 @@ const foodImages = [
     '/nibbly/foods/full_english.png',
   ];
 
-export default function NibblyRoot({children}: Props) {
-     const rowHeight = 95;           // px
-      const numberOfRows = 10;
-      
-      //  Shuffle once per mount so rows differ on every refresh
-      const rows = useMemo(
-        () => Array.from({ length: numberOfRows }, () => shuffle(foodImages)),
-        [numberOfRows]
+  export default function NibblyRoot({ children }: Props) {
+    const rowHeight = 95;
+    const numberOfRows = 10;
+  
+    const [rows, setRows] = useState<string[][] | null>(null);
+  
+    useEffect(() => {
+      const shuffled = Array.from({ length: numberOfRows }, () =>
+        shuffle(foodImages)
       );
-
-
+      setRows(shuffled);
+    }, []);
+  
     return (
-        <div className={`nibbly-root ${spaceMono.variable}`}>
-      {/* --- animated background --- */}
-      <div className="nibbly-rows">
-        {rows.map((images, i) => (
-          <FoodRow
-            key={i}
-            images={images}
-            direction={i % 2 === 0 ? 'right' : 'left'}
-            rowHeight={rowHeight}
-            speed={20}
-          />
-        ))}
+      <div className={`nibbly-root ${spaceMono.variable}`}>
+        <div className="nibbly-rows">
+          {rows?.map((images, i) => (
+            <FoodRow
+              key={i}
+              images={images}
+              direction={i % 2 === 0 ? 'right' : 'left'}
+              rowHeight={rowHeight}
+              speed={20}
+            />
+          ))}
+        </div>
+  
+        <main className="nibbly-overlay">{children}</main>
       </div>
-
-      {/* --- foreground page content --- */}
-      <main className="nibbly-overlay">{children}</main>
-    </div>
     );
-}
+  }
