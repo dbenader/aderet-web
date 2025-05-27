@@ -1,0 +1,34 @@
+/* Container that clips overflow */
+.wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: var(--row-h, 95px);
+}
+
+/* The long strip (200 % wide) that actually moves */
+.rail {
+  display: flex;
+  animation: scroll var(--row-dur, 50s) linear infinite;
+  animation-direction: var(--row-dir, normal);
+  will-change: transform;          // GPU hint
+}
+
+/* One copy of the image list */
+.track {
+  display: flex;
+  flex-shrink: 0;                  // keep its natural width
+}
+
+/* Image sizing */
+.track img {
+  width: var(--row-h, 95px);
+  height: var(--row-h, 95px);
+  display: block;                  // remove inline-image gaps
+  flex-shrink: 0;
+}
+
+/* Slide the rail by exactly half its width (-50 %) */
+@keyframes scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
