@@ -18,12 +18,12 @@ export default function Home() {
       </video>
 
       <div className={styles.overlayContent}>
-        <Image className={styles.logo} src="/aderet-logo.png" width={120} height={120} alt="Aderet Technologies LLC logo" />
-        <h1>Aderet Technologies LLC</h1>
+        <Image className={styles.logo} src="/logo3.png" width={120} height={120} alt="Aderet Technologies LLC logo" />
+        <h1>Aderet Technologies</h1>
         <nav>
           <Link href="/nibbly">Nibbly AI</Link>
           <Link href="/hammock">Hammock</Link>
-          <Link href="/about">About / Contact</Link>
+          <Link href="/about">About</Link>
         </nav>
       </div>
     </main>
