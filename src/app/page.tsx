@@ -1,3 +1,4 @@
+'use client';
 import styles from './styles.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -18,7 +19,7 @@ export default function Home() {
       </video>
 
       <div className={styles.overlayContent}>
-        <Image className={styles.logo} src="/logo3.png" width={120} height={120} alt="Aderet Technologies LLC logo" />
+        <Image className={styles.logo} src="/logo4.png" width={120} height={120} alt="Aderet Technologies LLC logo" />
         <h1>Aderet Technologies</h1>
         <nav>
           <Link href="/nibbly">Nibbly AI</Link>
