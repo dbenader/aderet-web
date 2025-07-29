@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './styles/nibbly.scss';
 import { Space_Mono } from "next/font/google";
 import shuffle from '@/utils/shuffle';

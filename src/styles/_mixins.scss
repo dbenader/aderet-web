@@ -1,0 +1,29 @@
+
+
+@mixin xs {
+    @media (max-width: 767px) {
+      @content;
+    }
+}
+  
+  // Mixin for screen width between 768px and 1023px
+@mixin sm {
+    @media (min-width: 768px) and (max-width: 1023px) {
+      @content;
+    }
+}
+  
+  // Mixin for screen width between 1024px and 1199px
+@mixin md {
+    @media (min-width: 1024px) and (max-width: 1199px) {
+      @content;
+    }
+}
+
+  
+// Mixin for screen width 1200px and above
+@mixin lg {
+    @media (min-width: 1200px) {
+      @content;
+    }
+}
