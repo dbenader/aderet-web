@@ -32,6 +32,7 @@
   width: 100vw;
   height: auto;
   z-index: -1;
+  pointer-events: none;
 
   @include xs {
     width: auto;

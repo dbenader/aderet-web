@@ -10,8 +10,10 @@ export default function NibblyLanding() {
         <h1>Nibbly&nbsp;AI</h1>
 
         <div className="app-stores">
-          <img src="/nibbly/app-store-button.svg" alt="Download on the App Store" width={150} />
-          <img src="/nibbly/play-store-button.png" alt="Get it on Google Play"   width={150} />
+          <a href="https://apps.apple.com/us/app/nibbly-ai/id6746419493">
+            <img src="/nibbly/app-store-button.svg" alt="Download on the App Store" width={150} />
+          </a>
+          {/* <img src="/nibbly/play-store-button.png" alt="Get it on Google Play"   width={150} /> */}
         </div>
 
         <div className="links">
