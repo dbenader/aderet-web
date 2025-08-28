@@ -116,10 +116,7 @@ export default function TermsOfService() {
         <h2>14. Contact</h2>
         <p>
           Questions? Email&nbsp;
-          <a href="mailto:support@aderettech.com">support@aderettech.com</a> or write to:<br/>
-          Aderet Technologies LLC<br/>
-          100 Main St, Suite 200<br/>
-          Detroit, MI 48201 USA
+          <a style={{textDecoration: 'underline'}} href="mailto:support@aderet.tech">support@aderet.tech</a>
         </p>
       </article>
     </main>

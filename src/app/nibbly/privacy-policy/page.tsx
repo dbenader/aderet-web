@@ -74,10 +74,7 @@ export default function PrivacyPolicy() {
         <h2>9. Contact Us</h2>
         <p>
           Questions or concerns? Email&nbsp;
-          <a href="mailto:privacy@aderettech.com">privacy@aderettech.com</a> or write to:<br />
-          Aderet Technologies LLC<br />
-          100 Main St, Suite 200<br />
-          Detroit, MI 48201&nbsp;USA
+          <a style={{textDecoration: 'underline'}} href="mailto:privacy@aderettech.com">support@aderet.tech</a>
         </p>
       </article>
     </main>

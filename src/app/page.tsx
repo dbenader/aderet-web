@@ -23,7 +23,7 @@ export default function Home() {
         <h1>Aderet Technologies</h1>
         <nav>
           <Link href="/nibbly">Nibbly AI</Link>
-          <Link href="/hammock">Hammock</Link>
+          <Link href="/hammock">Hamock</Link>
           <Link href="/about">About</Link>
         </nav>
       </div>
