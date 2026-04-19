@@ -21,7 +21,8 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: "Aderet Technologies LLC",
-  description: "Aderet Technologies LLC",
+  description:
+    "Technology concierge, automation, custom software, and practical AI from Aderet Technologies LLC.",
 };
 
 export default function RootLayout({
