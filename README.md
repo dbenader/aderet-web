@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aderet Prospect Engine
 
-## Getting Started
+An internal, CLI-first production line that crawls an existing business website, creates a traceable factual brief, directs a coding agent to build a standalone redesign, validates the result, and publishes it as a static preview.
 
-First, run the development server:
+The generator deliberately has no shared site template. The source website supplies facts and assets; the coding agent owns each redesign.
+
+## Quick start
+
+Requires Node 20+, npm, the Codex CLI, and (for deployment) AWS CLI credentials.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a prospect locally without deploying:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run prospect -- https://example-plumber.com --no-deploy
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The command prints the prospect ID. Its complete working set lives under `prospects/<id>/`:
 
-## Learn More
+```text
+source/pages/          original HTML snapshots
+source/crawl.json      structured extraction with source URLs
+assets/                downloaded image assets and manifest
+brief.md               normalized, source-bound business brief
+generation-prompt.md   exact agent handoff
+site/                  independent generated website project
+validation.json        build verification result
+prospect.json          pipeline status and preview URL
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Run stages separately
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run crawl -- https://example.com
+npm run generate -- <id>
+npm run validate -- <id>
+npm run deploy -- <id>
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Use `--no-generate` to crawl and prepare a brief only. The crawler stays on the original origin, prioritizes common business pages, caps itself at 12 pages by default, waits between requests, and never attempts to bypass access controls. Set `ADERET_MAX_PAGES` to change the cap.
 
-## Deploy on Vercel
+If the coding-agent executable is not named `codex`, set `ADERET_AGENT_COMMAND`. The permanent generation rules are in `AGENTS.md`; each run also writes its complete task to `generation-prompt.md`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Validation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Validation installs the generated site's locked dependencies where available, runs its production build, requires an `index.html`, and checks direct local references in that entry document. It writes a machine-readable result. Human visual review remains required before outreach.
+
+## AWS deployment
+
+The safe, isolated S3 + CloudFront stack and DNS cutover notes are in [infrastructure/README.md](infrastructure/README.md). Deployment refuses to run without an explicit `ADERET_BUCKET`. No existing AWS resource is inferred or modified.
+
+```bash
+export ADERET_BUCKET='<isolated stack bucket output>'
+export ADERET_DISTRIBUTION_ID='<distribution output>'
+export ADERET_PUBLIC_URL='https://aderet.tech'
+
+npm run deploy -- <id>
+npm run deploy:main
+```
+
+The dashboard deploy preserves the entire `preview/` prefix. A prospect deploy changes only its own `preview/<id>/` prefix.
+
+## Current MVP boundary
+
+The hosted dashboard is static: it displays the prospect register created during `npm run build` and gives you the correct local command. Crawling, agent generation, and AWS publishing run on the trusted workstation where credentials and source files already live. A remote job API, auth, database, CMS, customer domains, and custom application features are intentionally deferred.
