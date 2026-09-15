@@ -24,7 +24,7 @@ function PublicSite() {
     <section className="hero" ref={heroRef} onPointerMove={moveHero}>
       <div className="hero-media" aria-hidden="true" />
       <header className="public-nav">
-        <a className="brand" href="#top" aria-label="Aderet Technologies home">Aderet Technologies</a>
+        <a className="brand" href="#top" aria-label="Aderet Technologies home"><img src="/aderet-logo.webp" alt="" />Aderet Technologies</a>
         <nav aria-label="Primary navigation"><a href="#capabilities">Capabilities</a><a href="#about">About</a><a href="mailto:daniel@aderet.tech">Contact</a></nav>
         <a className="nav-status" href="mailto:daniel@aderet.tech"><i /> Build what&rsquo;s next</a>
       </header>
