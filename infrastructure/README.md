@@ -1,5 +1,9 @@
 # AWS hosting
 
+Production client sites use the separate `client-static-site.yaml` template through the repository's `client:provision` and `client:deploy` commands. Each client receives a private versioned bucket and its own CloudFront distribution. The bucket is retained if its CloudFormation stack is removed, and DNS is deliberately left external. See the root README for the certificate-validation and deployment workflow.
+
+The remainder of this document describes the shared Aderet dashboard and prospect-preview stack.
+
 This stack creates a new private, versioned S3 bucket and CloudFront distribution. Both S3 deletion policies are `Retain`; removing the stack does not delete generated sites. It does not inspect, import, or modify existing Aderet infrastructure.
 
 ## 1. Create an isolated stack
@@ -50,4 +54,3 @@ s3://<bucket>/preview/<id>/assets/*
 ```
 
 The CloudFront viewer-request function resolves directory paths to `index.html`, including `/preview/<id>/`.
-

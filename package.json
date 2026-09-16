@@ -11,8 +11,13 @@
     "prospect": "node scripts/aderet.mjs prospect",
     "crawl": "node scripts/aderet.mjs crawl",
     "generate": "node scripts/aderet.mjs generate",
+    "outreach": "node scripts/aderet.mjs outreach",
     "validate": "node scripts/aderet.mjs validate",
     "deploy": "node scripts/aderet.mjs deploy",
+    "promote": "node scripts/aderet.mjs promote",
+    "client:provision": "node scripts/aderet.mjs client:provision",
+    "client:deploy": "node scripts/aderet.mjs client:deploy",
+    "client:verify": "node scripts/aderet.mjs client:verify",
     "deploy:main": "node scripts/aderet.mjs deploy-main",
     "prospects:index": "node scripts/aderet.mjs index"
   },

@@ -56,3 +56,8 @@ dist/
 prospects/*/site/node_modules/
 prospects/*/site/dist/
 prospects/*/site/.vite/
+clients/*/site/node_modules/
+clients/*/site/dist/
+clients/*/site/build/
+clients/*/site/out/
+clients/*/site/.vite/
