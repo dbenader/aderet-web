@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": "ef9dba",
+    "businessName": "Recent ADU Project Video",
+    "sourceUrl": "https://ucandrinc.com/",
+    "status": "deployed",
+    "createdAt": "2026-09-16T19:06:20.790Z",
+    "updatedAt": "2026-09-17T04:46:34.708Z",
+    "discovery": {
+      "candidate": "strong",
+      "pagesCrawled": 54,
+      "urlsDiscovered": 58,
+      "imageReferences": 544,
+      "servicePages": 30,
+      "galleryPages": 22,
+      "projects": 9
+    },
+    "outreachFile": "outreach.md",
+    "outreachGeneratedAt": "2026-09-16T19:22:07.864Z",
+    "previewUrl": "https://aderet.tech/preview/ef9dba/"
+  }
+]

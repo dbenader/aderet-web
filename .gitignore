@@ -52,10 +52,10 @@ dist/
 .env
 .env.local
 
-# Generated prospect internals (metadata and briefs remain reviewable)
-prospects/*/site/node_modules/
-prospects/*/site/dist/
-prospects/*/site/.vite/
+# Generated prospect workspaces
+/prospects/
+
+# Generated client site internals
 clients/*/site/node_modules/
 clients/*/site/dist/
 clients/*/site/build/

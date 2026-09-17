@@ -24,8 +24,14 @@ The command prints the prospect ID. Its complete working set lives under `prospe
 ```text
 source/pages/          original HTML snapshots
 source/crawl.json      structured extraction with source URLs
+source/url-inventory.json categorized sitemap and linked URL inventory
+source/crawl-plan.json coverage-driven fetch selections and gaps
+source/discovery.json  classified pages, projects, galleries, and recommendations
 assets/                downloaded image assets and manifest
 brief.md               normalized, source-bound business brief
+assessment.md          agent-written pre-build candidate and content assessment
+build-plan.json        recommended or operator-selected site scope
+agent-usage.json       token usage reported by structured agent runs
 generation-prompt.md   exact agent handoff
 outreach-prompt.md     exact outreach-writing handoff
 outreach.md            tailored text message, email, and private source notes
@@ -38,13 +44,18 @@ prospect.json          pipeline status and preview URL
 
 ```bash
 npm run crawl -- https://example.com
+npm run analyze -- <id>
 npm run generate -- <id>
 npm run outreach -- <id>
 npm run validate -- <id>
 npm run deploy -- <id>
 ```
 
-Use `--no-generate` to crawl and prepare a brief only. The crawler stays on the original origin, prioritizes common business pages, caps itself at 12 pages by default, waits between requests, and never attempts to bypass access controls. Set `ADERET_MAX_PAGES` to change the cap.
+Use `--no-generate` to run discovery, assessment, build planning, and asset collection without building the site. Discovery inventories internal URLs from XML sitemaps and page links, categorizes them as core, proof, editorial, location, general, or utility, fetches all core/navigation and proof pages, and samples repetitive content families. `ADERET_MAX_FETCHES` is a 150-page emergency safety ceiling rather than the desired discovery size; the legacy `ADERET_MAX_PAGES` variable remains a fallback. URL inventory has separate high safety ceilings of 10,000 URLs and 100 sitemap files, configurable with `ADERET_MAX_INVENTORY_URLS` and `ADERET_MAX_SITEMAPS`. Set `ADERET_COLLECTION_SAMPLE_SIZE` to change the representative sample per repetitive family and `ADERET_MAX_ASSETS` to adjust the asset cap. The crawler stays on the original origin, waits between requests, and never attempts to bypass access controls.
+
+Small and moderate source sites are planned as complete rebuilds of all meaningful content. For larger sites, an interactive terminal run presents the categorized inventory and lets you choose between complete core coverage with curated collections, every meaningful content family, or a more focused multi-page concept. The resulting `build-plan.json` contains an explicit `routeManifest` with generated routes, collection strategies, target counts, and source pages. If the approved scope needs pages that representative discovery did not fetch, a targeted acquisition pass fetches them before generation. WordPress media attachments, feeds, pagination, tag and author archives, CMS paths, and direct media files are excluded from the inventory. Use `--auto` to accept recommendations without pausing, including in scripts and non-interactive environments. Use `--no-analyze` to skip the additional agent assessment while retaining deterministic discovery and planning. Run `npm run analyze -- <id>` to regenerate the assessment and choose the plan again for an existing crawl.
+
+Agent calls use Codex's JSON event stream when the default `codex` command is configured. The shell reports useful activity and saves token usage when the CLI supplies it; unavailable usage is omitted rather than estimated.
 
 If the coding-agent executable is not named `codex`, set `ADERET_AGENT_COMMAND`. Set `ADERET_OUTREACH_SENDER` to the sender identity that should appear in the messages. The permanent generation rules are in `AGENTS.md`; each run also writes its complete task to `generation-prompt.md`.
 
